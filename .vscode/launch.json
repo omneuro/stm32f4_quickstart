@@ -24,7 +24,7 @@
             "coreConfigs": [
                 {
                     "coreIndex": 0,
-                    "programBinary": "./target/thumbv7em-none-eabihf/debug/{{project_name}}",
+                    "programBinary": "./target/thumbv7em-none-eabihf/debug/{{project-name}}",
                     "svdFile": "${workspaceFolder}/.vscode/STM32F446.svd"
                 }
             ]
