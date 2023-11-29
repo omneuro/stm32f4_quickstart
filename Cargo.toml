@@ -2,7 +2,7 @@
 authors = ["Administrator"]
 edition = "2018"
 readme = "README.md"
-name = "{{project_name}}"
+name = "{{project-name}}"
 version = "0.1.0"
 
 [dependencies]
@@ -29,7 +29,7 @@ features = ["stm32f446", "rt"]
 
 # this lets you use `cargo fix`!
 [[bin]]
-name = "{{project_name}}"
+name = "{{project-name}}"
 test = false
 bench = false
 
