@@ -8,13 +8,12 @@ pub mod rcc{
     // use panic_itm as _; // logs messages over ITM; requires ITM support
     // use panic_semihosting as _; // logs messages to the host stderr; requires a debugger
     
-    use stm32f4::stm32f446;
+    use stm32f4::stm32f446::Peripherals;
 
-    pub fn initialize_clock(){
-        let dp = stm32f446::Peripherals::take().unwrap();
+    pub fn initialize_clock(mut dp: Peripherals ) ->Peripherals{
 
         dp.RCC.cr.write(|w| w.hseon().set_bit()); // Turning on the high speed external oscillator
-        while !(dp.RCC.cr.read().hserdy().bit()){ // waiting for the high speed external oscillator ready bit to be set
+        while dp.RCC.cr.read().hserdy().bit(){ // waiting for the high speed external oscillator ready bit to be set
             // Do noting while the hserdy bit is not set (i.e 0)
         }
 
@@ -56,6 +55,8 @@ pub mod rcc{
         dp.GPIOA.moder.write(|w| unsafe {w.moder5().bits(0b01)});
         //set PA5 Output to high signalling end of configuration
         dp.GPIOA.odr.write(|w| w.odr5().set_bit());
+
+        dp
     }
 
 }
