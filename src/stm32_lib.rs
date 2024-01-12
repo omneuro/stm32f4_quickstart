@@ -48,4 +48,17 @@ pub mod rcc {
             //do noting while clock source is not set
         }
     }
+
+    // delay function implemented using timer 11
+    fn delay_us(us: u16, timer: &mut stm32f446::TIM11) {
+        timer.cnt.write(|w| unsafe { w.cnt().bits(0x0000) });
+        while timer.cnt.read().cnt().bits() < us {}
+    }
+
+    fn delay_ms(ms: u16, timer: &mut stm32f446::TIM11) {
+        let mut i = 0;
+        for i in 0..ms {
+            delay_us(1000, timer);
+        }
+    }
 }
